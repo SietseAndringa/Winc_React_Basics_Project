@@ -9,6 +9,10 @@ import {
 } from "@chakra-ui/react";
 
 export const RecipeCard = function ({ recipe, setRecipe }) {
+  const filterHealthLabels = recipe.recipe.healthLabels.filter((item) => {
+    return item === "Vegan" || item === "Vegetarian";
+  });
+  console.log(filterHealthLabels);
   return (
     <Card
       onClick={() => setRecipe(recipe)}
@@ -44,34 +48,18 @@ export const RecipeCard = function ({ recipe, setRecipe }) {
           borderRadius="10px"
         />
         <Flex justify="space-evenly">
-          {recipe.recipe.healthLabels
-            .filter((item) => item.includes("Vegan"))
-            .map((filteredItem) => (
-              <Text
-                bgColor="green.200"
-                mt={2}
-                pl={1.5}
-                pr={1.5}
-                borderRadius="5px"
-                key={filteredItem}
-              >
-                {filteredItem}
-              </Text>
-            ))}
-          {recipe.recipe.healthLabels
-            .filter((item) => item.includes("Vegetarian"))
-            .map((filteredItem) => (
-              <Text
-                bgColor="green.200"
-                mt={2}
-                pl={1.5}
-                pr={1.5}
-                borderRadius="5px"
-                key={filteredItem}
-              >
-                {filteredItem}
-              </Text>
-            ))}
+          {filterHealthLabels.map((filteredItem) => (
+            <Text
+              bgColor="green.200"
+              mt={2}
+              pl={1.5}
+              pr={1.5}
+              borderRadius="5px"
+              key={filteredItem}
+            >
+              {filteredItem}
+            </Text>
+          ))}
         </Flex>
         <Flex justify="space-evenly">
           {recipe.recipe.dietLabels.map((item) => (
